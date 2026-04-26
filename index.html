@@ -3,10 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WRW Road to Legend</title>
+
+  <title>WRW Founder Milestones</title>
   <meta name="theme-color" content="#f7f3ea" />
+
   <link rel="manifest" href="manifest.json" />
   <link rel="apple-touch-icon" href="icon-192.png" />
+
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-title" content="WRW Milestones" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -21,9 +24,8 @@
       --green: #048d64;
       --green-dark: #036b4d;
       --sand: #efe3cf;
-      --purple: #7b3ff2;
-      --pink: #e85da7;
       --gold: #c99b38;
+      --danger: #b93333;
       --shadow: 0 14px 35px rgba(20, 20, 20, 0.08);
       --radius: 22px;
     }
@@ -32,12 +34,16 @@
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background:
         radial-gradient(circle at top left, rgba(4, 141, 100, 0.10), transparent 32rem),
-        radial-gradient(circle at top right, rgba(123, 63, 242, 0.10), transparent 30rem),
+        radial-gradient(circle at top right, rgba(201, 155, 56, 0.11), transparent 30rem),
         var(--bg);
       color: var(--ink);
     }
@@ -74,7 +80,7 @@
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--green-dark);
-      font-weight: 800;
+      font-weight: 850;
       margin-bottom: 8px;
     }
 
@@ -92,6 +98,8 @@
       color: var(--muted);
       font-size: 1rem;
       line-height: 1.55;
+      position: relative;
+      z-index: 2;
     }
 
     .top-actions {
@@ -103,8 +111,8 @@
       z-index: 2;
     }
 
-    button {
-      border: 0;
+    button,
+    summary {
       font: inherit;
       cursor: pointer;
     }
@@ -112,8 +120,8 @@
     .btn {
       min-height: 44px;
       border-radius: 999px;
-      padding: 0 16px;
-      font-weight: 800;
+      padding: 0 18px;
+      font-weight: 850;
       border: 1px solid transparent;
       transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
     }
@@ -140,7 +148,17 @@
 
     .btn-danger {
       color: #fff;
-      background: #b93333;
+      background: var(--danger);
+    }
+
+    .install-help {
+      display: none;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 700;
+      position: relative;
+      z-index: 2;
     }
 
     .stats-grid {
@@ -167,28 +185,62 @@
     .stat span {
       color: var(--muted);
       font-size: 0.85rem;
-      font-weight: 700;
+      font-weight: 750;
     }
 
     .section {
-      margin-top: 18px;
+      margin-top: 14px;
       background: rgba(255, 255, 255, 0.72);
       border: 1px solid var(--line);
       border-radius: 26px;
-      padding: 14px;
       box-shadow: var(--shadow);
+      overflow: hidden;
     }
 
-    .section-head {
-      display: flex;
-      justify-content: space-between;
+    details.section[open] {
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    .section-summary {
+      list-style: none;
+      padding: 18px;
+      display: grid;
+      grid-template-columns: 1fr auto;
       gap: 14px;
-      align-items: flex-start;
-      padding: 10px 8px 14px;
+      align-items: center;
     }
 
-    .section-title-wrap {
+    .section-summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .summary-left {
       min-width: 0;
+    }
+
+    .summary-title-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .chevron {
+      width: 32px;
+      height: 32px;
+      border-radius: 12px;
+      background: #efe7d9;
+      display: grid;
+      place-items: center;
+      font-weight: 950;
+      color: var(--green-dark);
+      flex: 0 0 auto;
+      transition: transform 0.2s ease;
+    }
+
+    details[open] .chevron {
+      transform: rotate(90deg);
+      background: var(--green);
+      color: #fff;
     }
 
     h2 {
@@ -199,7 +251,7 @@
     }
 
     .section-note {
-      margin-top: 4px;
+      margin-top: 5px;
       color: var(--muted);
       font-size: 0.9rem;
     }
@@ -208,12 +260,12 @@
       text-align: right;
       color: var(--muted);
       font-size: 0.86rem;
-      font-weight: 800;
+      font-weight: 850;
       white-space: nowrap;
     }
 
     .bar {
-      width: 110px;
+      width: 120px;
       height: 8px;
       border-radius: 999px;
       overflow: hidden;
@@ -232,6 +284,7 @@
     }
 
     .milestone-grid {
+      padding: 0 14px 14px;
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 10px;
@@ -308,7 +361,7 @@
     .milestone-date {
       color: var(--muted);
       font-size: 0.88rem;
-      font-weight: 700;
+      font-weight: 750;
       position: relative;
       z-index: 1;
     }
@@ -360,7 +413,7 @@
     label {
       display: block;
       color: var(--muted);
-      font-weight: 800;
+      font-weight: 850;
       margin-bottom: 7px;
     }
 
@@ -371,7 +424,7 @@
       border-radius: 16px;
       padding: 0 12px;
       font: inherit;
-      font-weight: 800;
+      font-weight: 850;
       background: #fbf7f0;
       color: var(--ink);
     }
@@ -482,12 +535,9 @@
         border-radius: 24px;
       }
 
-      .section {
-        padding: 10px;
-      }
-
-      .section-head {
+      .section-summary {
         display: block;
+        padding: 15px;
       }
 
       .section-progress {
@@ -502,6 +552,7 @@
 
       .milestone-grid {
         grid-template-columns: 1fr;
+        padding: 0 10px 10px;
       }
 
       .timeline-item {
@@ -514,17 +565,21 @@
     }
   </style>
 </head>
+
 <body>
   <div class="app">
     <header>
       <div class="eyebrow">Walk Run Wrestle</div>
-      <h1>Road to Legend</h1>
+      <h1>Founder Milestones</h1>
       <p class="subtitle">
-        A founder milestone board for Liam & Becca. Backdate the wins, unlock the stickers, and build the WRW story one moment at a time.
+        A simple WRW reward board for Liam & Becca. Open each section, backdate the wins, and unlock each sticker as the story grows.
       </p>
 
-      <div class="top-actions" style="justify-content:center;">
-        <button class="btn btn-primary" id="installApp" style="font-size:18px;padding:14px 28px;">Download App</button>
+      <div class="top-actions">
+        <button class="btn btn-primary" id="installApp">Download App</button>
+      </div>
+      <div class="install-help" id="installHelp">
+        If the button does nothing, open your browser menu and choose “Add to Home Screen”.
       </div>
     </header>
 
@@ -568,15 +623,18 @@
       </div>
     </div>
   </dialog>
+
   <div class="toast" id="toast"></div>
+
   <script>
-    const STORAGE_KEY = "wrw-road-to-legend-v2";
+    const STORAGE_KEY = "wrw-founder-milestones-v2";
 
     const groups = [
       {
         id: "foundation",
         title: "Foundation",
         note: "The moments that turned WRW from an idea into something real.",
+        open: true,
         milestones: [
           ["opened_wrw", "Opened WRW"],
           ["website_launched", "Website Launched"],
@@ -698,7 +756,8 @@
           ["revenue_500", "£500 Revenue"],
           ["revenue_1000", "£1000 Revenue"],
           ["first_multi_sale_day", "First Multi-Sale Day"],
-          ["first_multi_sale_month", "First Multi-Sale Month"]
+          ["first_multi_sale_month", "First Multi-Sale Month"],
+          ["first_stranger_customer", "First Stranger Customer"]
         ]
       }
     ];
@@ -718,6 +777,7 @@
     const dateInput = document.getElementById("dateInput");
     const toast = document.getElementById("toast");
     const installBtn = document.getElementById("installApp");
+    const installHelp = document.getElementById("installHelp");
 
     function todayIso() {
       const d = new Date();
@@ -756,21 +816,25 @@
         const totalCount = group.milestones.length;
         const percent = totalCount ? Math.round((doneCount / totalCount) * 100) : 0;
 
-        const section = document.createElement("section");
+        const section = document.createElement("details");
         section.className = `section ${group.className || ""}`.trim();
         section.id = `section-${group.id}`;
+        if (group.open) section.open = true;
 
         section.innerHTML = `
-          <div class="section-head">
-            <div class="section-title-wrap">
-              <h2>${group.title}</h2>
+          <summary class="section-summary">
+            <div class="summary-left">
+              <div class="summary-title-row">
+                <div class="chevron">›</div>
+                <h2>${group.title}</h2>
+              </div>
               <div class="section-note">${group.note}</div>
             </div>
             <div class="section-progress">
               ${doneCount} / ${totalCount} unlocked
               <div class="bar"><span style="width:${percent}%"></span></div>
             </div>
-          </div>
+          </summary>
           <div class="milestone-grid"></div>
         `;
 
@@ -821,7 +885,7 @@
         .sort((a, b) => state[a.id].date.localeCompare(state[b.id].date));
 
       if (!completed.length) {
-        timelineList.innerHTML = `<div class="empty-state">No milestones unlocked yet. Tap a milestone, choose the date, and your WRW timeline starts here.</div>`;
+        timelineList.innerHTML = `<div class="empty-state">No milestones unlocked yet. Open a section, tap a milestone, choose the date, and your WRW timeline starts here.</div>`;
         return;
       }
 
@@ -903,24 +967,24 @@
       deferredInstallPrompt = event;
     });
 
-    if (installBtn) {
-      installBtn.addEventListener("click", async () => {
-        if (!deferredInstallPrompt) {
-          showToast("Use browser menu: Add to Home Screen");
-          return;
-        }
+    installBtn.addEventListener("click", async () => {
+      installHelp.style.display = "block";
 
-        deferredInstallPrompt.prompt();
-        await deferredInstallPrompt.userChoice;
-        deferredInstallPrompt = null;
-      });
-    }
+      if (!deferredInstallPrompt) {
+        showToast("Use browser menu: Add to Home Screen");
+        return;
+      }
+
+      deferredInstallPrompt.prompt();
+      await deferredInstallPrompt.userChoice;
+      deferredInstallPrompt = null;
+    });
 
     function showToast(message) {
       toast.textContent = message;
       toast.classList.add("show");
       clearTimeout(showToast.timeout);
-      showToast.timeout = setTimeout(() => toast.classList.remove("show"), 2200);
+      showToast.timeout = setTimeout(() => toast.classList.remove("show"), 2400);
     }
 
     render();
