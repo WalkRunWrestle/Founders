@@ -1,6 +1,6 @@
 {
-  "name": "WRW Road to Legend",
-  "short_name": "WRW Milestones",
+  "name": "WRW Founder Milestones",
+  "short_name": "WRW Miles",
   "description": "Founder milestone board for Walk Run Wrestle.",
   "start_url": "./index.html",
   "scope": "./",
